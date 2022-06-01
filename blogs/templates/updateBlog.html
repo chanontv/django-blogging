@@ -1,0 +1,58 @@
+{% extends 'layout.html' %}
+{% block content %}
+{% for blog in blogs %}
+{% if user.username == blog.writer %}
+<!-- ====== Banner Start ====== -->
+<section class="ud-page-banner">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ud-banner-content">
+                    <h1>Update Blog</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ====== Banner End ====== -->
+
+<!-- ====== Form ====== -->
+<div class="container" style="margin-top: 20px;">
+
+    <form action="updaterecord/{{blog.id}}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="" class="form-label">BlogName</label>
+            <input type="text" class="form-control" name="blogname" value="{{blog.name}}">
+        </div>
+
+        <div class="mb-3">
+            <label for="" class="form-label">Description</label><br>
+            <textarea name="desc" rows="10" cols="60" value="">{{blog.description}}</textarea>
+        </div>
+
+        <div class="mb-3">
+            <label for="" class="form-label">Content</label><br>
+            <textarea name="content" rows="10" cols="60" value="">{{blog.content}}</textarea>
+        </div>
+
+        <div class="mb-3">
+            <label for="" class="form-label">Category</label>
+            <select name="category">
+                {% for cate in categories %}
+                <option value="{{cate.id}}">{{cate.name}}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <input type="submit" value="Save" class="btn btn-primary mt-2 mb-3">
+    </form>
+</div>
+<!-- ====== Form End ====== -->
+{% else %}
+
+{% include 'no_access.html' %}
+
+{% endif %}
+{% endfor %}
+{% endblock %}

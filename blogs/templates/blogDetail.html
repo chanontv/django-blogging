@@ -1,0 +1,140 @@
+{%extends "layout.html" %}
+{% load humanize %}
+{% load static %}
+{% block content %}
+
+<!-- ====== Banner Start ====== -->
+<section class="ud-page-banner">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="ud-banner-content">
+          <h1>Blog Detail Page</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ====== Banner End ====== -->
+
+<!-- ====== Blog Details Start ====== -->
+<section class="ud-blog-details">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="ud-blog-details-image">
+          <img src="{% static 'assets/images/blog/blogging.jpg' %}" alt="blog details" />
+          <div class="ud-blog-overlay">
+            <div class="ud-blog-overlay-content">
+              <div class="ud-blog-author">
+                <span>
+                  By <a href="javascript:void(0)"> {{blog.writer}} </a>
+                </span>
+              </div>
+
+              <div class="ud-blog-meta">
+                <p class="date">
+                  <i class="lni lni-calendar"></i> <span>{{blog.created}}</span>
+                </p>
+                <p class="view">
+                  <i class="lni lni-eye"></i> <span>{{blog.views | intcomma}}</span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-8">
+        <div class="ud-blog-details-content">
+          <h2 class="ud-blog-details-title">
+            {{blog.name}}
+          </h2>
+          <p class="ud-blog-details-para">
+            {{blog.description}}
+          </p>
+          
+          <h3 class="ud-blog-details-subtitle">
+            {{blog.content}}
+          </h3>
+
+          <div class="ud-blog-details-action">
+            <ul class="ud-blog-tags">
+              <li>
+                <a href="javascript:void(0)">{{blog.category}}</a>
+              </li>
+            </ul>
+            <div class="ud-blog-share">
+              <h6>Share This Post</h6>
+              <ul class="ud-blog-share-links">
+                <li>
+                  <a href="javascript:void(0)" class="facebook">
+                    <i class="lni lni-facebook-filled"></i>
+                  </a>
+                </li>
+                <li>
+                  <a href="javascript:void(0)" class="twitter">
+                    <i class="lni lni-twitter-filled"></i>
+                  </a>
+                </li>
+                <li>
+                  <a href="javascript:void(0)" class="linkedin">
+                    <i class="lni lni-linkedin-original"></i>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="ud-blog-sidebar">
+          <div class="ud-articles-box">
+            <h3 class="ud-articles-box-title">Popular Articles</h3>
+            <ul class="ud-articles-list">
+              {% for pop in popular %}
+              <li>
+                <div class="ud-article-image">
+                  <img src="{% static 'assets/images/blog/bannder-ad.png' %}" alt="author" />
+                </div>
+                <div class="ud-article-content">
+                  <h5 class="ud-article-title">
+                    <a href="{%url 'blogdetail' pop.id%}">
+                      {{pop.name}}
+                    </a>
+                  </h5>
+                  <p class="ud-article-author">{{pop.category}}</p>
+                </div>
+              </li>
+              {% endfor %}
+            </ul>
+          </div>
+
+          <div class="ud-articles-box">
+            <h3 class="ud-articles-box-title">Recommended Articles</h3>
+            <ul class="ud-articles-list">
+              {% for sug in suggestion %}
+              <li>
+                <div class="ud-article-image">
+                  <img src="{% static 'assets/images/blog/bannder-ad.png' %}" alt="author" />
+                </div>
+                <div class="ud-article-content">
+                  <h5 class="ud-article-title">
+                    <a href="{%url 'blogdetail' sug.id%}">
+                      {{sug.name}}
+                    </a>
+                  </h5>
+                  <p class="ud-article-author">{{sug.category}}</p>
+                </div>
+              </li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ====== Blog Details End ====== -->
+<br>
+{% endblock%}

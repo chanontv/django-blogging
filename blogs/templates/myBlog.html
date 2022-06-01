@@ -1,0 +1,66 @@
+{% extends 'layout.html' %}
+{% block content %}
+{% if user.username == writer %}
+<!-- ====== Banner Start ====== -->
+<section class="ud-page-banner">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="ud-banner-content">
+          <h1>My Blog</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ====== Banner End ====== -->
+
+<!-- ====== Form ====== -->
+<section class="ud-blog-grids">
+  <div class="container">
+    <div class="row">
+      <table class="table table-striped table-hover">
+        <table class="table">
+          <thead class="table-primary">
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">BlogName</th>
+              <th scope="col">Description</th>
+              <th scope="col">Edit</th>
+              <th scope="col">Delete</th>
+            </tr>
+          </thead>
+          {% for blog in blogs %}
+          <tbody>
+            <tr>
+              <th scope="row">
+                {{ forloop.counter }}
+              </th>
+              <td>{{blog.name}}</td>
+              <td>{{blog.description}}</td>
+              <td><a class="btn btn-warning" href="/updateblog/{{blog.id}}" role="button">Edit</a></td>
+              <td>
+                <a class="btn btn-danger" href="/deleteblog/{{user.username}}/{{blog.id}}" role="button">Delete</a>
+              </td>
+            </tr>
+            </tr>
+          </tbody>
+          {% endfor %}
+        </table>
+        <br>
+      </table>
+      {% if messages %}
+      {% for message in messages %}
+      <b style="color: rgb(38, 215, 43)" text-align="center">{{message}}</b>
+      {% endfor %}
+      {% endif %}
+    </div>
+  </div>
+</section>
+<!-- ====== Form End ====== -->
+{% else %}
+
+{% include 'no_access.html' %}
+
+{% endif %}
+{% endblock %}

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+{% load humanize %}
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blogging</title>
+
+  <!--====== Favicon Icon ======-->
+  <link rel="shortcut icon" href="{% static 'assets/images/favicon.svg' %}" type="{% static 'image/svg' %}" />
+
+  <!-- ===== All CSS files ===== -->
+  <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/css/animate.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/css/lineicons.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/css/ud-styles.css' %}">
+</head>
+
+<body>
+  <!-- ====== Header Start ====== -->
+  <header class="ud-header">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <nav class="navbar navbar-expand-lg">
+            <a class="navbar-brand" href="/">
+              <img src="{% static 'assets/images/logo/logo.svg' %}" alt="Logo" />
+            </a>
+            <button class="navbar-toggler">
+              <span class="toggler-icon"> </span>
+              <span class="toggler-icon"> </span>
+              <span class="toggler-icon"> </span>
+            </button>
+
+            <div class="navbar-collapse">
+              <ul id="nav" class="navbar-nav mx-auto">
+                <li class="nav-item">
+                  <a class="ud-menu-scroll" href="/">Home</a>
+                </li>
+                {% if user.is_authenticated %}
+                <li class="nav-item nav-item-has-children">
+                  <a href="javascript:void(0)"> Blog </a>
+                  <ul class="ud-submenu">
+                    <li class="ud-submenu-item">
+                      <a href="/createblog" class="ud-submenu-link">
+                        CreateBlog
+                      </a>
+                    </li>
+                    <li class="ud-submenu-item">
+                      <a href="{%url 'myblog' user.username%}" class="ud-submenu-link">
+                        MyBlog
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+                <li class="nav-item nav-item-has-children">
+                  <a href="javascript:void(0)"> Account </a>
+                  <ul class="ud-submenu">
+                    <li class="ud-submenu-item">
+                      <a href="/updateprofileform" class="ud-submenu-link">
+                        Edit Profile
+                      </a>
+                    </li>
+                    <li class="ud-submenu-item">
+                      <a href="/changepasswordform" class="ud-submenu-link">
+                        Change Password
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+                {% endif %}
+              </ul>
+            </div>
+           
+            <div class="navbar-btn d-none d-sm-inline-block">
+              {% if user.is_authenticated %}
+              <a class="ud-main-btn ud-login-btn">
+                Hello ,{{user.username}}
+              </a>
+              <a class="ud-main-btn ud-white-btn" href="/logout">
+                Sign out
+              </a>
+              {% else %}
+              <a href="/loginform" class="ud-main-btn ud-login-btn">
+                Sign In
+              </a>
+              <a class="ud-main-btn ud-white-btn" href="/registerform">
+                Sign Up
+              </a>
+              {% endif %}
+            </div>
+
+          </nav>
+        </div>
+      </div>
+    </div>
+  </header>
+  <!-- ====== Header End ====== -->
+
+  {%block content %}
+
+  {% endblock %}
+
+  <!-- ====== Footer Start ====== -->
+  <footer class="ud-footer wow fadeInUp" data-wow-delay=".15s">
+    <div class="shape shape-1">
+      <img src="{% static 'assets/images/footer/shape-1.svg' %}" alt="shape" />
+    </div>
+    <div class="shape shape-2">
+      <img src="{% static 'assets/images/footer/shape-2.svg' %}" alt="shape" />
+    </div>
+    <div class="shape shape-3">
+      <img src="{% static 'assets/images/footer/shape-3.svg' %}" alt="shape" />
+    </div>
+   
+    <div class="ud-footer-bottom">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8">
+            <ul class="ud-footer-bottom-left">
+              <li>
+                <a href="javascript:void(0)">Privacy policy</a>
+              </li>
+              <li>
+                <a href="javascript:void(0)">Support policy</a>
+              </li>
+              <li>
+                <a href="javascript:void(0)">Terms of service</a>
+              </li>
+            </ul>
+          </div>
+          <div class="col-md-4">
+            <p class="ud-footer-bottom-right">
+              Copyright 2022 Chanont. All right reserved.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <!-- ====== Footer End ====== -->
+
+  <!-- ====== Back To Top Start ====== -->
+  <a href="javascript:void(0)" class="back-to-top">
+    <i class="lni lni-chevron-up"> </i>
+  </a>
+  <!-- ====== Back To Top End ====== -->
+
+  <!-- ====== All Javascript Files ====== -->
+  <script src="{% static 'assets/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'assets/js/wow.min.js' %}"></script>
+  <script src="{% static 'assets/js/main.js' %}"></script>
+</body>
+
+</html>
